@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrada na Festa</title>
+</head>
+<body>
+    <h1>Verificação de Idade para a Festa</h1>
+
+    <label for="idade">Digite sua idade:</label>
+    <input type="number" id="idade">
+    <button onclick="verificarIdade()">Verificar</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function verificarIdade() {
+            const idadeInput = document.getElementById("idade");
+            const resultadoTexto = document.getElementById("resultado");
+            const idade = parseInt(idadeInput.value);
+
+            if (isNaN(idade)) {
+                resultadoTexto.textContent = "Por favor, digite uma idade válida.";
+            } else if (idade < 18) {
+                resultadoTexto.textContent = "Desculpe, menores de 18 anos não podem entrar na festa.";
+            } else {
+                resultadoTexto.textContent = "Você tem permissão para entrar na festa! Divirta-se!";
+            }
+        }
+    </script>
+</body>
+</html>

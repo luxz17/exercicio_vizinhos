@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de Produtos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Classificação de Produtos</h1>
+
+    <label for="codigoProduto">Digite o código do produto:</label><br>
+    <input type="number" id="codigoProduto" min="1"><br>
+    <button onclick="classificarProduto()">Classificar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function classificarProduto() {
+            const codigo = parseInt(document.getElementById('codigoProduto').value);
+            let classificacao = "";
+
+            switch (codigo) {
+                case 1:
+                    classificacao = "Alimento não-perecível";
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                    classificacao = "Alimento perecível";
+                    break;
+                case 5:
+                case 6:
+                    classificacao = "Vestuário";
+                    break;
+                case 7:
+                    classificacao = "Higiene Pessoal";
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                    classificacao = "Limpeza e Utensílios Domésticos";
+                    break;
+                default:
+                    classificacao = "Código inválido";
+            }
+
+            document.getElementById('resultado').textContent = "Classificação: " + classificacao;
+        }
+    </script>
+</body>
+</html>
