@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let menu = parseInt(prompt(" *-MENU-* \nDigite o seu numero de pedido: \n100: Cachorro quente - R$ 12,50 \n101: Bauru simples - R$ 12,50\n 102: Bauru com ovo – R$ 10,50\n 103: Hambúrguer – R$ 10,50 \n 104: Cheeseburguer – R$ 16,50 \n 105: Refrigerante 2L – R$ 12,50"));
+        let quantidade = parseInt(prompt("Qual quantidade deseja"));
+        let precoUnitario;
+        let precoTotal;
+        switch (menu) {
+case 100:
+precoUnitario = 12,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Cachorros Quentes, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+
+case 101:
+precoUnitario = 12,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Bauru simples, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+
+case 102:
+precoUnitario = 10,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Bauru com ovo, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+
+case 103:
+precoUnitario = 10,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Hambúrguer, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+
+case 104:
+precoUnitario = 16,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Cheeseburguer, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+
+case 105:
+precoUnitario = 12,50;
+precoTotal = precoUnitario*quantidade;
+alert(" Você comprou"+quantidade+"Refrigerante 2L, pagando o valor de R$" + precoTotal.toFixed(2));
+break;
+default:
+    
+        }
+    </script>
+</body>
+
+</html>

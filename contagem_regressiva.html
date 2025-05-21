@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contagem Regressiva com For</title>
+</head>
+<body>
+    <h1>Contagem Regressiva</h1>
+    <label for="numberInput">Digite um número inteiro positivo:</label>
+    <input type="number" id="numberInput" min="1" step="1">
+    <button onclick="startCountdownWithFor()">Iniciar Contagem</button>
+
+    <div id="countdown-display"></div>
+    <div id="errorMessage" style="color: red;"></div>
+
+    <script>
+        // Uma variável para controlar o tempo de cada número na contagem
+        let timeoutIds = []; // Array para armazenar os IDs dos timeouts e poder limpá-los
+
+        function startCountdownWithFor() {
+            const numberInput = document.getElementById('numberInput');
+            const countdownDisplay = document.getElementById('countdown-display');
+            const errorMessage = document.getElementById('errorMessage');
+            let initialNumber = parseInt(numberInput.value);
+
+            // Limpa mensagens de erro e o display anterior
+            errorMessage.textContent = '';
+            countdownDisplay.textContent = '';
+
+            // Limpa quaisquer timeouts anteriores para evitar múltiplas contagens
+            timeoutIds.forEach(id => clearTimeout(id));
+            timeoutIds = [];
+
+            // Validação da entrada
+            if (isNaN(initialNumber) || initialNumber <= 0 || !Number.isInteger(initialNumber)) {
+                errorMessage.textContent = "Por favor, digite um número inteiro positivo válido.";
+                return;
+            }
+
+            // A lógica da contagem regressiva com 'for' e 'setTimeout'
+            for (let i = initialNumber; i >= 0; i--) {
+                // Captura o valor de 'i' para cada iteração do loop
+                // (usar 'let' no loop já cria um escopo para cada 'i', mas 'const num' torna mais explícito)
+                const num = i;
+                const delay = (initialNumber - i) * 1000; // Atraso em milissegundos
+
+                // Agenda a atualização do display para cada número
+                const timeoutId = setTimeout(() => {
+                    countdownDisplay.textContent = num;
+                    if (num === 0) {
+                        countdownDisplay.textContent = "FIM!";
+                    }
+                }, delay);
+                timeoutIds.push(timeoutId); // Armazena o ID do timeout
+            }
+        }
+    </script>
+</body>
+</html>
