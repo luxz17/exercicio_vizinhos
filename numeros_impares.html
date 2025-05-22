@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Números Ímpares Simples</title>
+</head>
+<body>
+
+    <h1>Exibir Números Ímpares</h1>
+
+    <p>Digite um número positivo:</p>
+    <input type="number" id="numeroEntrada" min="1">
+    <button onclick="gerarNumerosImpares()">Gerar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function gerarNumerosImpares() {
+            const numeroEntrada = document.getElementById('numeroEntrada').value;
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = ''; // Limpa o resultado anterior
+
+            const limite = parseInt(numeroEntrada);
+
+            if (isNaN(limite) || limite <= 0) {
+                resultadoDiv.innerHTML = 'Por favor, digite um número positivo válido.';
+                return;
+            }
+
+            let impares = [];
+            for (let i = 1; i <= limite; i++) {
+                if (i % 2 !== 0) {
+                    impares.push(i);
+                }
+            }
+
+            if (impares.length > 0) {
+                resultadoDiv.innerHTML = `Números ímpares até ${limite}: ${impares.join(', ')}`;
+            } else {
+                resultadoDiv.innerHTML = `Não há números ímpares até ${limite}.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

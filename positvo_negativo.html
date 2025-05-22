@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somador de Números Positivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        input[type="number"] {
+            padding: 8px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Somador de Números Positivos</h1>
+    <p>Digite números. A soma será exibida quando você digitar um número negativo.</p>
+
+    <input type="number" id="numeroInput" placeholder="Digite um número">
+    <button onclick="adicionarNumero()">Adicionar</button>
+
+    <p>Números digitados: <span id="listaNumeros"></span></p>
+    <p id="resultado">Soma atual: 0</p>
+
+    <script>
+        let soma = 0;
+        let numerosDigitados = [];
+
+        function adicionarNumero() {
+            const numeroInput = document.getElementById('numeroInput');
+            const numero = parseFloat(numeroInput.value); // Converte o valor para número
+
+            // Verifica se o input não está vazio e é um número válido
+            if (isNaN(numero) || numeroInput.value.trim() === '') {
+                alert('Por favor, digite um número válido.');
+                return;
+            }
+
+            if (numero >= 0) {
+                soma += numero;
+                numerosDigitados.push(numero);
+                document.getElementById('resultado').textContent = `Soma atual: ${soma}`;
+                document.getElementById('listaNumeros').textContent = numerosDigitados.join(', ');
+            } else {
+                // Se o número for negativo, encerra o programa e exibe o resultado final
+                document.getElementById('resultado').textContent = `A soma final dos números positivos é: ${soma}`;
+                document.getElementById('numeroInput').disabled = true; // Desabilita o input
+                document.querySelector('button').disabled = true; // Desabilita o botão
+                alert(`Você digitou um número negativo (${numero}). A soma final dos números positivos é: ${soma}`);
+            }
+
+            numeroInput.value = ''; // Limpa o campo de input
+            numeroInput.focus(); // Retorna o foco para o campo de input
+        }
+
+        // Opcional: Permitir adicionar número ao pressionar Enter
+        document.getElementById('numeroInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                adicionarNumero();
+            }
+        });
+    </script>
+</body>
+</html>

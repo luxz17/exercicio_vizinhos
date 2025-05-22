@@ -1,39 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora Contínua</title>
 </head>
-
 <body>
     <script>
-        let operador = prompt("Escolha uma operação: +, -, /, *");
-        let numero1 = parseInt(prompt("Coloque o primeiro valor."));
-        let numero2 = parseInt(prompt("Coloque o segundo valor."));
-        let resultado;
+        let continuar = true; // Variável para controlar o loop
 
-        switch (operador) {
-            case '' + '':
-                resultado = numero1 + numero2;
-                break;
-            case '' - '':
-                resultado = numero1 - numero2;
-                break;
-            case '' / '':
-                resultado = numero1 / numero2;
-                break;
-            case '' * '':
-                resultado = numero1 * numero2;
-                break;
-                default:
-                resultado = ("operador ínvalido");
-        
+        while (continuar) {
+            let operador = prompt("Escolha uma operação: +, -, /, * (ou digite 'sair' para encerrar)");
+
+            // Verifica se o usuário quer sair
+            if (operador === 'sair' || operador === null) { // 'null' caso o usuário clique em 'cancelar'
+                continuar = false;
+                alert("Programa encerrado. Obrigado por usar a calculadora!");
+                break; // Sai do loop imediatamente
+            }
+
+            // Garante que o operador seja válido antes de pedir os números
+            if (['+', '-', '/', '*'].includes(operador)) {
+                let numero1 = parseFloat(prompt("Coloque o primeiro valor."));
+                let numero2 = parseFloat(prompt("Coloque o segundo valor."));
+                let resultado;
+
+                // Validação de entrada para os números
+                if (isNaN(numero1) || isNaN(numero2)) {
+                    alert("Por favor, insira números válidos.");
+                    continue; // Pula para a próxima iteração do loop
+                }
+
+                switch (operador) {
+                    case '+':
+                        resultado = numero1 + numero2;
+                        break;
+                    case '-':
+                        resultado = numero1 - numero2;
+                        break;
+                    case '/':
+                        if (numero2 === 0) {
+                            alert("Divisão por zero não é permitida.");
+                            continue; // Pula para a próxima iteração do loop
+                        }
+                        resultado = numero1 / numero2;
+                        break;
+                    case '*':
+                        resultado = numero1 * numero2;
+                        break;
+                }
+                alert("O resultado é: " + resultado);
+
+            } else {
+                alert("Operador inválido. Por favor, escolha entre +, -, /, * ou 'sair'.");
+            }
         }
-        alert("O resultado é" + resultado);
     </script>
-
 </body>
-
 </html>
