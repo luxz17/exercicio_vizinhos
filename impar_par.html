@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Par ou Ímpar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        #repetirContainer {
+            margin-top: 20px;
+        }
+        #repetirContainer button {
+            margin: 5px;
+            background-color: #28a745;
+        }
+        #repetirContainer button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificador de Par ou Ímpar</h1>
+        <label for="numero">Digite um número:</label>
+        <input type="number" id="numero" placeholder="Ex: 10">
+        <button onclick="verificarNumero()">Verificar</button>
+        <p id="resultado"></p>
+
+        <div id="repetirContainer" style="display: none;">
+            <p>Deseja verificar outro número?</p>
+            <button onclick="reiniciar()">Sim</button>
+            <button onclick="window.close()">Não</button>
+        </div>
+    </div>
+
+    <script>
+        function verificarNumero() {
+            const numeroInput = document.getElementById('numero');
+            const resultadoParagrafo = document.getElementById('resultado');
+            const repetirContainer = document.getElementById('repetirContainer');
+            const numero = parseInt(numeroInput.value);
+
+            if (isNaN(numero)) {
+                resultadoParagrafo.textContent = 'Por favor, digite um número válido.';
+                resultadoParagrafo.style.color = 'red';
+            } else {
+                if (numero % 2 === 0) {
+                    resultadoParagrafo.textContent = `O número ${numero} é PAR.`;
+                    resultadoParagrafo.style.color = 'green';
+                } else {
+                    resultadoParagrafo.textContent = `O número ${numero} é ÍMPAR.`;
+                    resultadoParagrafo.style.color = 'blue';
+                }
+                repetirContainer.style.display = 'block'; // Mostra as opções para repetir
+            }
+        }
+
+        function reiniciar() {
+            document.getElementById('numero').value = ''; // Limpa o campo de entrada
+            document.getElementById('resultado').textContent = ''; // Limpa o resultado
+            document.getElementById('repetirContainer').style.display = 'none'; // Esconde as opções para repetir
+            document.getElementById('numero').focus(); // Coloca o foco de volta no campo de entrada
+        }
+    </script>
+</body>
+</html>

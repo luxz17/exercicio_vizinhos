@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Números Pares</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #feedbackMessage {
+            color: #dc3545;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            height: 1.2em; /* Garante que a mensagem não "pule" */
+        }
+        #numerosInfo {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #555;
+        }
+        #resultado {
+            margin-top: 25px;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #28a745; /* Verde para o resultado */
+            padding: 10px;
+            background-color: #e9f7ef;
+            border-radius: 5px;
+            display: none; /* Escondido inicialmente */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contador de Números Pares</h1>
+        <p>Insira 10 números (um de cada vez) para contar quantos são pares.</p>
+
+        <input type="number" id="numeroInput" placeholder="Digite um número inteiro">
+        <div id="feedbackMessage"></div>
+
+        <button id="adicionarBtn">Adicionar Número</button>
+
+        <p id="numerosInfo">Números inseridos: <strong id="numerosContador">0</strong> de 10</p>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const numeroInput = document.getElementById('numeroInput');
+        const adicionarBtn = document.getElementById('adicionarBtn');
+        const numerosContadorSpan = document.getElementById('numerosContador');
+        const resultadoElement = document.getElementById('resultado');
+        const feedbackMessage = document.getElementById('feedbackMessage');
+
+        // Variáveis de controle
+        let numerosDigitados = [];
+        let numerosPares = 0;
+        const totalNumerosRequeridos = 10;
+
+        /**
+         * Adiciona um número validado à lista e atualiza o contador.
+         */
+        function adicionarNumero() {
+            const valorInput = numeroInput.value.trim(); // Remove espaços em branco
+            feedbackMessage.textContent = ''; // Limpa mensagens de erro anteriores
+
+            // Validação: verifica se o campo está vazio
+            if (valorInput === '') {
+                feedbackMessage.textContent = 'Por favor, digite um número.';
+                return;
+            }
+
+            const numero = parseInt(valorInput);
+
+            // Validação: verifica se é um número válido
+            if (isNaN(numero)) {
+                feedbackMessage.textContent = 'Entrada inválida. Digite um número inteiro.';
+                return;
+            }
+
+            // Validação: verifica se é um número inteiro (opcional, mas boa prática)
+            if (numero % 1 !== 0) {
+                feedbackMessage.textContent = 'Por favor, digite um número inteiro (sem casas decimais).';
+                return;
+            }
+
+            numerosDigitados.push(numero);
+            numerosContadorSpan.textContent = numerosDigitados.length;
+            numeroInput.value = ''; // Limpa o campo para a próxima entrada
+            numeroInput.focus(); // Coloca o foco de volta no input
+
+            // Verifica se o número é par
+            if (numero % 2 === 0) {
+                numerosPares++;
+            }
+
+            // Se o limite de números for atingido, mostra o resultado
+            if (numerosDigitados.length === totalNumerosRequeridos) {
+                exibirResultadoFinal();
+            }
+        }
+
+        /**
+         * Exibe o resultado final e desabilita os controles.
+         */
+        function exibirResultadoFinal() {
+            resultadoElement.textContent = `Você digitou ${totalNumerosRequeridos} números, e ${numerosPares} deles são pares.`;
+            resultadoElement.style.display = 'block'; // Torna o resultado visível
+
+            // Desabilita o input e o botão para novas entradas
+            numeroInput.disabled = true;
+            adicionarBtn.disabled = true;
+            feedbackMessage.textContent = 'Todos os números foram inseridos!';
+            feedbackMessage.style.color = '#28a745'; // Mensagem de sucesso
+        }
+
+        // Adiciona um ouvinte de evento para o botão
+        adicionarBtn.addEventListener('click', adicionarNumero);
+
+        // Permite adicionar número pressionando Enter no campo de input
+        numeroInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && numerosDigitados.length < totalNumerosRequeridos) {
+                adicionarNumero();
+            }
+        });
+    </script>
+</body>
+</html>

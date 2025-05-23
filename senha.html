@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Senha</title>
+</head>
+<body>
+
+    <h1>Digite a Senha</h1>
+
+    <script>
+        // Senha correta
+        const senhaCorreta = "Joao17";
+        let senhaDigitada;
+
+        // Loop para pedir a senha até que a correta seja digitada
+        do {
+            senhaDigitada = prompt("Por favor, digite a senha:");
+
+            // Verifica se o usuário cancelou o prompt
+            if (senhaDigitada === null) {
+                alert("Operação cancelada.");
+                break; // Sai do loop se o usuário cancelar
+            }
+
+            if (senhaDigitada !== senhaCorreta) {
+                alert("Senha incorreta. Tente novamente.");
+            }
+
+        } while (senhaDigitada !== senhaCorreta);
+
+        // Se a senha correta foi digitada (e não foi cancelado)
+        if (senhaDigitada === senhaCorreta) {
+            alert("Acesso concedido.");
+        }
+    </script>
+
+</body>
+</html>
