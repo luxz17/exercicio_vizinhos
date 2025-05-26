@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplicação de Vetor por Variável</title>
+</head>
+<body>
+    <h1>Multiplicação de Vetor por Variável</h1>
+
+    <p>Digite os números do vetor (separados por vírgula):</p>
+    <input type="text" id="vetorEntrada" placeholder="Ex: 1,2,3,4">
+    <br><br>
+
+    <p>Digite o número multiplicador:</p>
+    <input type="number" id="multiplicador" placeholder="Ex: 5">
+    <br><br>
+
+    <button onclick="multiplicarVetor()">Multiplicar</button>
+
+    <p id="resultado">O resultado da multiplicação aparecerá aqui.</p>
+
+    <script>
+        function multiplicarVetor() {
+            const vetorString = document.getElementById('vetorEntrada').value;
+            const multiplicadorString = document.getElementById('multiplicador').value;
+            const resultadoParagrafo = document.getElementById('resultado');
+
+            // Limpa mensagens de erro anteriores
+            resultadoParagrafo.textContent = '';
+
+            // 1. Validar a entrada do vetor
+            if (!vetorString.trim()) {
+                resultadoParagrafo.textContent = 'Erro: Por favor, digite os números do vetor.';
+                return;
+            }
+
+            const vetorNumeros = vetorString.split(',').map(num => parseInt(num.trim()));
+
+            // 2. Validar se todos os elementos do vetor são números
+            if (vetorNumeros.some(isNaN)) {
+                resultadoParagrafo.textContent = 'Erro: O vetor deve conter apenas números inteiros válidos.';
+                return;
+            }
+
+            // 3. Validar a entrada do multiplicador
+            if (!multiplicadorString.trim()) {
+                resultadoParagrafo.textContent = 'Erro: Por favor, digite o número multiplicador.';
+                return;
+            }
+
+            const multiplicador = parseInt(multiplicadorString);
+
+            // 4. Validar se o multiplicador é um número
+            if (isNaN(multiplicador)) {
+                resultadoParagrafo.textContent = 'Erro: O multiplicador deve ser um número inteiro válido.';
+                return;
+            }
+
+            // Realiza a multiplicação
+            const vetorResultado = vetorNumeros.map(num => num * multiplicador);
+
+            // Exibe o resultado
+            resultadoParagrafo.textContent = 'Vetor original: [' + vetorNumeros.join(', ') + ']\n';
+            resultadoParagrafo.textContent += 'Multiplicador: ' + multiplicador + '\n';
+            resultadoParagrafo.textContent += 'Vetor resultante: [' + vetorResultado.join(', ') + ']';
+        }
+    </script>
+</body>
+</html>
