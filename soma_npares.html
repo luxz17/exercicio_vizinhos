@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma de Números Pares</title>
+</head>
+<body>
+
+
+    <script>
+        // Array para armazenar os números digitados pelo usuário
+        const numeros = [];
+        let somaPares = 0;
+
+        // Loop para pedir 10 números ao usuário
+        for (let i = 0; i < 10; i++) {
+            let entrada;
+            let numeroInteiro;
+
+            // Loop para garantir que a entrada seja um número inteiro válido
+            while (true) {
+                entrada = prompt(`Por favor, digite o ${i + 1}º número inteiro:`);
+
+                // Verifica se o usuário cancelou a entrada
+                if (entrada === null) {
+                    alert("Operação cancelada. Por favor, recarregue a página para tentar novamente.");
+                    // Interrompe a execução do script se o usuário cancelar
+                    throw new Error("Usuário cancelou a entrada."); 
+                }
+
+                numeroInteiro = parseInt(entrada);
+
+                // Verifica se a entrada é um número e se é um número inteiro
+                if (!isNaN(numeroInteiro) && Number.isInteger(numeroInteiro)) {
+                    numeros.push(numeroInteiro); // Adiciona o número ao array
+                    break; // Sai do loop de validação da entrada
+                } else {
+                    alert("Entrada inválida. Por favor, digite um número inteiro.");
+                }
+            }
+        }
+
+        // Itera sobre o array para somar apenas os números pares
+        for (let i = 0; i < numeros.length; i++) {
+            if (numeros[i] % 2 === 0) { // Verifica se o número é par
+                somaPares += numeros[i];
+            }
+        }
+
+        // Exibe o resultado em um alert
+        alert(`A soma de todos os números pares digitados é: ${somaPares}`);
+
+    </script>
+
+</body>
+</html>
