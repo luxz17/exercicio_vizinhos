@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Desconto</title>
+</head>
+<body>
+
+
+    <button onclick="calcularDesconto()">Calcular Desconto</button>
+
+    <script>
+        function calcularDesconto() {
+            var valorOriginal = Number(prompt("Digite o valor original do produto:"));
+
+            if (isNaN(valorOriginal) || valorOriginal <= 0) {
+                alert("Por favor, digite um valor original válido e positivo.");
+                return; 
+            }
+
+            var percentualDesconto = Number(prompt("Digite a porcentagem de desconto:"));
+
+            if (isNaN(percentualDesconto) || percentualDesconto < 0 || percentualDesconto > 100) {
+                alert("Por favor, digite uma porcentagem de desconto válida (entre 0 e 100).");
+                return; 
+            }
+
+            var valorDesconto = valorOriginal * (percentualDesconto / 100);
+            var valorFinal = valorOriginal - valorDesconto;
+
+            alert("O valor final do produto com desconto é: R$" + valorFinal.toFixed(2));
+        }
+    </script>
+
+</body>
+</html>
